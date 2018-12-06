@@ -1,25 +1,26 @@
-#### keywords: spatial statistics, SPARC, Powley, K-function, Nikki Pelot
+#### keywords: spatial statistics, SPARC, K-function, data courtesy of Nikki Pelot
+#### Hackathon 2018
 
+########################################################################################
+#### Some useful libraries that are used later
+########################################################################################
 
-####### needed libraries
+#require(caret) for machine learning 
+#require(tibble) for interacting with complex tables and data frames
 
-require(caret)
-require(tibble)
-
-
-require(ez)
 require(magrittr)
 require(dplyr)
 
-require(multcomp)
-require(emmeans)
-#require(officer)
+#require(multcomp) for ANOVA
+#require(emmeans)  for ANOVA
+
 require(spatstat) ### for spatial statistics
 require(png)  ### for loading the boundary maps in PNG format
 library(httr) #### for data download
 
 library(lctools) ### for spatial autocorrelation 
-#install.packages("dixon")
+library(dixon)
+
 
 ########################################################################################
 #### Load the data describing the ROIs, and the mask defining the contours
