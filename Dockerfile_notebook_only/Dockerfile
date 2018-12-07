@@ -72,8 +72,8 @@ RUN apt-get update \
 RUN pip3 install jupyter opencv-contrib-python pandas numpy matplotlib ipywidgets scipy notedown statsmodels seaborn blackfynn scikit-image
 
 # Install simcore packagek
-RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#egg=version_subpkg&subdirectory=tree/master/packages/simcore-sdk
-RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#egg=version_subpkg&subdirectory=services/storage/client-sdk/python
+RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#subdirectory=packages/simcore-sdk
+RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#subdirectory=services/storage/client-sdk/python
 
 # Install nodejss
 # https://github.com/nodesource/distributions
@@ -109,10 +109,10 @@ RUN jupyter notebook --generate-config && \
 RUN echo "c.NotebookApp.open_browser = False" >>/root/.jupyter/jupyter_notebook_config.py && \
     echo "c.InteractiveShellApp.matplotlib = 'inline'" >>/root/.ipython/profile_default/ipython_config.py
         
-label io.simcore.key = '{"key": "simcore/services/dynamic/spat-an-app"}' \
+label io.simcore.key = '{"key": "simcore/services/dynamic/spat-an-app-nb"}' \
       && io.simcore.version = '{"version": "1.0.0"}' \
       && io.simcore.type = '{"type": "dynamic"}' \
-      && io.simcore.name = '{"name": "spat-an-app"}' \
+      && io.simcore.name = '{"name": "spat-an-app-nb"}' \
       && io.simcore.description = '{"description": "Jupyter lab"}' \
       && io.simcore.authors = '{"authors": [{"name": "cchorn", "email": "chorn@pitt.edu", "affiliation": "Univ Pittsburgh"}]}' \
       && io.simcore.contact = '{"contact": "chorn@pitt.edu"}' \
