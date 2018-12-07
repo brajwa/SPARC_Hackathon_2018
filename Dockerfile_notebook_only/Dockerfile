@@ -1,3 +1,4 @@
+# this build contains just the Jupyter notebook
 # Dockerfile for the Spat-An-App Project Team
 
 # use Ubuntu 18.04 base image
@@ -68,25 +69,19 @@ RUN apt-get update \
   && pip3 install --upgrade pip 
 
 # Install python3 packages ... removed rpy2 because of installation error
-RUN pip3 install jupyter jupyterlab opencv-contrib-python pandas numpy matplotlib ipywidgets scipy statsmodels seaborn blackfynn scikit-image
+RUN pip3 install jupyter opencv-contrib-python pandas numpy matplotlib ipywidgets scipy notedown statsmodels seaborn blackfynn scikit-image
 
-# Install simcore package
+# Install simcore packagek
 RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#egg=version_subpkg&subdirectory=tree/master/packages/simcore-sdk
 RUN pip3 install git+https://github.com/ITISFoundation/osparc-simcore.git#egg=version_subpkg&subdirectory=services/storage/client-sdk/python
 
-# Install Jupyter lab extensions
-####################################################
-
-# Install nodejs for Jupyter lab extensions
+# Install nodejss
 # https://github.com/nodesource/distributions
 RUN curl -sL https://deb.nodesource.com/setup_10.x | sudo -E bash -
 RUN sudo apt-get install -y nodejs 
 
 # Install yarn
 RUN npm install -g yarn
-
-# Install Jupyterlab extensions
-RUN jupyter labextension install @jupyterlab/toc @jupyter-widgets/jupyterlab-manager
 
 # Install R and packages
 ####################################################
@@ -130,10 +125,7 @@ label io.simcore.key = '{"key": "simcore/services/dynamic/spat-an-app"}' \
       && org.label-schema.vcs-ref = "${VCS_REF}"
 
 # Run the Jupyter lab .. comment the first command because it is only for the notebook
-CMD jupyter lab --allow-root --ip 0.0.0.0 --no-browser
-
-# this command does not work
-# --LabApp.nbserver_extensions="{'input_retriever':True}"
+CMD jupyter notebook --allow-root --ip 0.0.0.0 --no-browser --NotebookApp.nbserver_extensions="{'input_retriever':True}"
 
 # set directories and ports
 ####################################################
