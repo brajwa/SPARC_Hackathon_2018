@@ -109,23 +109,23 @@ RUN jupyter notebook --generate-config && \
 RUN echo "c.NotebookApp.open_browser = False" >>/root/.jupyter/jupyter_notebook_config.py && \
     echo "c.InteractiveShellApp.matplotlib = 'inline'" >>/root/.ipython/profile_default/ipython_config.py
         
-label io.simcore.key = '{"key": "simcore/services/dynamic/spat-an-app-nb"}' \
-      && io.simcore.version = '{"version": "1.0.0"}' \
-      && io.simcore.type = '{"type": "dynamic"}' \
-      && io.simcore.name = '{"name": "spat-an-app-nb"}' \
-      && io.simcore.description = '{"description": "Jupyter lab"}' \
-      && io.simcore.authors = '{"authors": [{"name": "cchorn", "email": "chorn@pitt.edu", "affiliation": "Univ Pittsburgh"}]}' \
-      && io.simcore.contact = '{"contact": "chorn@pitt.edu"}' \
-      && io.simcore.inputs = '{"inputs": {"input_1":{"label": "input 1", "displayOrder":0, "description": "Input 1", "type": "data:*/*"}, "input_2":{"label": "input 2", "displayOrder":1, "description": "Input 2", "type": "data:*/*"}}}' \
-      && io.simcore.outputs = '{"outputs": {"output_1":{"label": "output 1", "displayOrder":0, "description": "Output 1", "type": "data:*/*"}, "output_2":{"label": "output 2", "displayOrder":1, "description": "Output 2", "type": "data:*/*"}}}' \
-      && simcore.service.settings = '[{"name": "resources", "type": "Resources", "value": {"mem_limit":17179869184, "cpu_limit": 4000000000}}, {"name": "ports", "type": "int", "value": 8888}, {"name": "constraints", "type": "string", "value": ["node.platform.os == linux"]}]' \
-      && org.label-schema.schema-version = "1.0" \
-      && org.label-schema.build-date = "${BUILD_DATE}" \
-      && org.label-schema.vcs-url = "https://github.com/ITISFoundation/osparc-simcore" \
-      && org.label-schema.vcs-ref = "${VCS_REF}"
+LABEL io.simcore.key='{"key": "simcore/services/dynamic/spat-an-app-nb"}' \
+      io.simcore.version='{"version": "1.0.0"}' \
+      io.simcore.type='{"type": "dynamic"}' \
+      io.simcore.name='{"name": "spat-an-app-nb"}' \
+      io.simcore.description='{"description": "Jupyter lab"}' \
+      io.simcore.authors='{"authors": [{"name": "cchorn", "email": "chorn@pitt.edu", "affiliation": "Univ Pittsburgh"}]}' \
+      io.simcore.contact='{"contact": "chorn@pitt.edu"}' \
+      io.simcore.inputs='{"inputs": {"input_1":{"label": "input 1", "displayOrder":0, "description": "Input 1", "type": "data:*/*"}, "input_2":{"label": "input 2", "displayOrder":1, "description": "Input 2", "type": "data:*/*"}}}' \
+      io.simcore.outputs='{"outputs": {"output_1":{"label": "output 1", "displayOrder":0, "description": "Output 1", "type": "data:*/*"}, "output_2":{"label": "output 2", "displayOrder":1, "description": "Output 2", "type": "data:*/*"}}}' \
+      simcore.service.settings='[{"name": "resources", "type": "Resources", "value": {"mem_limit":17179869184, "cpu_limit": 4000000000}}, {"name": "ports", "type": "int", "value": 8888}, {"name": "constraints", "type": "string", "value": ["node.platform.os == linux"]}]' \
+      org.label-schema.schema-version="1.0" \
+      org.label-schema.build-date="${BUILD_DATE}" \
+      org.label-schema.vcs-url="https://github.com/ITISFoundation/osparc-simcore" \
+      org.label-schema.vcs-ref="${VCS_REF}"
 
 # Run the Jupyter lab .. comment the first command because it is only for the notebook
-CMD jupyter notebook --allow-root --ip 0.0.0.0 --no-browser --NotebookApp.nbserver_extensions="{'input_retriever':True}"
+CMD jupyter notebook --allow-root --ip 0.0.0.0 --no-browser --NotebookApp.nbserver_extensions="{'input_retriever':True}" --NotebookApp.base_url=${SIMCORE_NODE_BASEPATH} --NotebookApp.extra_static_paths="['${SIMCORE_NODE_BASEPATH}/static']" --NotebookApp.token=''
 
 # set directories and ports
 ####################################################
