@@ -8,18 +8,25 @@
 #require(caret) for machine learning 
 #require(tibble) for interacting with complex tables and data frames
 
-require(magrittr)
-require(dplyr)
+load.lib<-c("tibble", "magrittr", "readxl", "httr", "png", "ggfortify", "RJSplot", "spatstat",
+            "DT", "scales", "emmeans", "DT", "IRdisplay", "dplyr", "lctools", "dixon")
+
+install.lib<-load.lib[!load.lib %in% installed.packages()]
+for(lib in install.lib) install.packages(lib,dependencies=TRUE)
+sapply(load.lib,require,character=TRUE)
+
+#require(magrittr)
+#require(dplyr)
 
 #require(multcomp) for ANOVA
 #require(emmeans)  for ANOVA
 
-require(spatstat) ### for spatial statistics
-require(png)  ### for loading the boundary maps in PNG format
-library(httr) #### for data download
+#require(spatstat) ### for spatial statistics
+#require(png)  ### for loading the boundary maps in PNG format
+#library(httr) #### for data download
 
-library(lctools) ### for spatial autocorrelation 
-library(dixon)
+#library(lctools) ### for spatial autocorrelation 
+#library(dixon)
 
 
 ########################################################################################
